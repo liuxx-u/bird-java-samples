@@ -1,9 +1,4 @@
 spring:
-  main:
-    allow-bean-definition-overriding: true
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT+8
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/bird-demo?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
     username: root
@@ -17,6 +12,7 @@ mybatis-plus:
   type-aliases-super-type: com.bird.service.common.model.IDO
   configuration:
     mapUnderscoreToCamelCase: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       id-type: input
@@ -24,14 +20,5 @@ mybatis-plus:
       logic-not-delete-value: 0
 
 bird:
-  web:
-    base-packages: com.bird.samples.controller
-    ip-check:
-      enable: true
-      ip-list:
-        - uri-pattern: /v1/*
-          ips: 0.0.0.0/0
-        - uri-pattern: /v2/*
-          ips: 0.0.0.0/0
   service:
-    audit-meta-object: false
+    audit-meta-object: true

@@ -28,6 +28,11 @@
             <version>${bird.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.bird</groupId>
+            <artifactId>bird-service-support</artifactId>
+            <version>${bird.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -44,16 +49,23 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.yaml</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.json</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
