@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DemoMapper extends AbstractMapper<DemoDO> {
+
+    void deleteAll();
 }

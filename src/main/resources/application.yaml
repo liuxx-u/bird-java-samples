@@ -35,3 +35,4 @@ bird:
           ips: 0.0.0.0/0
   service:
     audit-meta-object: false
+    optimistic-lock-check: true

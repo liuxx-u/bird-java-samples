@@ -22,3 +22,4 @@ mybatis-plus:
 bird:
   service:
     audit-meta-object: true
+#    block-attack: false

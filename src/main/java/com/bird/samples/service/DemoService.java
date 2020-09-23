@@ -11,4 +11,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DemoService extends AbstractStringService<DemoMapper, DemoDO> {
+
+    public void deleteAll(){
+        mapper.deleteAll();
+    }
 }
