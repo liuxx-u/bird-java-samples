@@ -10,17 +10,19 @@ import java.util.Date;
  */
 @Data
 public class DemoBO {
+
     private String name;
 
-    private Integer count;
+    private String description;
 
-    private Date createTime;
+    private Integer num;
 
-    public DemoBO(){
-        this.createTime = new Date();
+    private Date date;
+
+    public DemoBO() {
     }
 
-    public DemoBO(String name){
+    public DemoBO(String name) {
         this.name = name;
     }
 }

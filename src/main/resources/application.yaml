@@ -17,6 +17,7 @@ mybatis-plus:
   type-aliases-super-type: com.bird.service.common.model.IDO
   configuration:
     mapUnderscoreToCamelCase: false
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       id-type: input
@@ -34,5 +35,5 @@ bird:
         - uri-pattern: /v2/*
           ips: 0.0.0.0/0
   service:
-    audit-meta-object: false
-    optimistic-lock-check: true
+    db-field-trace:
+      enabled: true
