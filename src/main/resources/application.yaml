@@ -37,3 +37,10 @@ bird:
   service:
     db-field-trace:
       enabled: true
+  trace:
+    dispatcher:
+      period: 30
+    db-field:
+      enabled: true
+    request:
+      enabled: true

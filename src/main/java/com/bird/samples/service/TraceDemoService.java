@@ -13,4 +13,7 @@ import org.springframework.stereotype.Service;
 public class TraceDemoService extends AbstractStringService<TraceDemoMapper, TraceDemoDO> {
 
 
+    public void updateName(){
+        mapper.updateName();
+    }
 }

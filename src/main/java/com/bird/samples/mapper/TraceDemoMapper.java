@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TraceDemoMapper extends AbstractMapper<TraceDemoDO> {
+
+    void updateName();
 }
