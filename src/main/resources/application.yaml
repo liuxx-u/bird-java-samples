@@ -28,14 +28,13 @@ bird:
   web:
     base-packages: com.bird.samples.controller
     ip-check:
-      enable: true
+      enabled: true
       ip-list:
         - uri-pattern: /v1/*
           ips: 0.0.0.0/0
         - uri-pattern: /v2/*
           ips: 0.0.0.0/0
-  service:
-    db-field-trace:
+    body-read:
       enabled: true
   trace:
     dispatcher:
@@ -43,4 +42,4 @@ bird:
     db-field:
       enabled: true
     request:
-      enabled: true
+      trace-type: default

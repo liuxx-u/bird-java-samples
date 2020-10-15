@@ -1,8 +1,11 @@
 package com.bird.samples.controller;
 
 import com.bird.core.NameValue;
+import com.bird.core.Result;
 import com.bird.core.exception.UserFriendlyException;
+import com.bird.core.trace.Traceable;
 import com.bird.samples.model.TraceDemoDO;
+import com.bird.samples.pojo.CrudDemoBO;
 import com.bird.samples.service.TraceDemoService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +34,14 @@ public class TraceFieldController {
         traceDemoService.insert(traceDemo);
     }
 
+    @GetMapping("/insertDto")
+    public Result<String> insertDto() {
+        CrudDemoBO demo = new CrudDemoBO().setName("liuxx").setDescription("desc").setNum(1).setDate(new Date());
+        return Result.success("success",traceDemoService.insert(demo));
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Traceable("test")
     @GetMapping("/update")
     public void update() {
         String updateValue = UUID.randomUUID().toString();
@@ -40,9 +51,14 @@ public class TraceFieldController {
         traceDemoService.update(traceDemo);
 
 
-        String updateValue2 = UUID.randomUUID().toString();
-        traceDemo.setName(updateValue2).setDescription(updateValue2).setNum(ThreadLocalRandom.current().nextInt(100)).setDate(new Date());
-        traceDemoService.update(traceDemo);
+//        String updateValue2 = UUID.randomUUID().toString();
+//        traceDemo.setName(updateValue2).setDescription(updateValue2).setNum(ThreadLocalRandom.current().nextInt(100)).setDate(new Date());
+//        traceDemoService.update(traceDemo);
+    }
+
+    @GetMapping("/lambadaUpdate")
+    public void lambadaUpdate() {
+        traceDemoService.lambdaUpdate().eq(TraceDemoDO::getName,"liuxx").set(TraceDemoDO::getName,"liuxx02").update();
     }
 
     @GetMapping("/update2")
