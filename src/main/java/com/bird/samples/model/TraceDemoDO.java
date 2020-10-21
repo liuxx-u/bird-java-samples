@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.bird.service.common.model.StringDO;
 import com.bird.service.common.trace.TraceField;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
@@ -14,7 +13,7 @@ import java.util.Date;
  * @author liuxx
  * @since 2020/9/30
  */
-@Data
+@Getter@Setter
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @TableName("trace_demo")

@@ -18,13 +18,18 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <bird.version>2.0.2-SNAPSHOT</bird.version>
+        <bird.version>2.0.3-SNAPSHOT</bird.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.bird</groupId>
             <artifactId>bird-web-support</artifactId>
+            <version>${bird.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bird</groupId>
+            <artifactId>bird-web-file</artifactId>
             <version>${bird.version}</version>
         </dependency>
         <dependency>
@@ -63,6 +68,9 @@
 
     <build>
         <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
             <resource>
                 <directory>src/main/java</directory>
                 <includes>

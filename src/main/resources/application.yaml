@@ -43,3 +43,8 @@ bird:
       enabled: true
     request:
       trace-type: default
+      url-patterns: /**,/api
+      trace-headers: user-agent
+  file:
+    disk:
+      upload-dir: /mnt/upload/

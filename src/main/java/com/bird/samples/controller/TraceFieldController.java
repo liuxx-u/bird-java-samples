@@ -8,6 +8,7 @@ import com.bird.samples.model.TraceDemoDO;
 import com.bird.samples.pojo.CrudDemoBO;
 import com.bird.samples.service.TraceDemoService;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -22,10 +23,17 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequestMapping("/trace/field")
 public class TraceFieldController {
 
+    private final TransactionTemplate transactionTemplate;
     private final TraceDemoService traceDemoService;
 
-    public TraceFieldController(TraceDemoService traceDemoService) {
+    public TraceFieldController(TraceDemoService traceDemoService,TransactionTemplate transactionTemplate) {
         this.traceDemoService = traceDemoService;
+        this.transactionTemplate = transactionTemplate;
+    }
+
+    @GetMapping("/getFirst")
+    public Result<String> getFirst() {
+        return Result.success("success",traceDemoService.lambdaQuery().last("limit 1").one().toString());
     }
 
     @GetMapping("/insert")
@@ -37,7 +45,8 @@ public class TraceFieldController {
     @GetMapping("/insertDto")
     public Result<String> insertDto() {
         CrudDemoBO demo = new CrudDemoBO().setName("liuxx").setDescription("desc").setNum(1).setDate(new Date());
-        return Result.success("success",traceDemoService.insert(demo));
+        traceDemoService.insert(demo);
+        throw new UserFriendlyException("error");
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -51,9 +60,9 @@ public class TraceFieldController {
         traceDemoService.update(traceDemo);
 
 
-//        String updateValue2 = UUID.randomUUID().toString();
-//        traceDemo.setName(updateValue2).setDescription(updateValue2).setNum(ThreadLocalRandom.current().nextInt(100)).setDate(new Date());
-//        traceDemoService.update(traceDemo);
+        String updateValue2 = UUID.randomUUID().toString();
+        traceDemo.setName(updateValue2).setDescription(updateValue2).setNum(ThreadLocalRandom.current().nextInt(100)).setDate(new Date());
+        traceDemoService.update(traceDemo);
     }
 
     @GetMapping("/lambadaUpdate")
@@ -78,6 +87,29 @@ public class TraceFieldController {
         TraceDemoDO traceDemo = traceDemoService.lambdaQuery().last("limit 1").one();
         traceDemoService.delete(traceDemo.getId());
         throw new UserFriendlyException("roll back");
+    }
+
+    @GetMapping("/successWithRollback")
+    public Result<String> successWithRollback() {
+        String name = traceDemoService.updateFirst();
+
+        try {
+            name = traceDemoService.updateLast();
+        }catch (Exception ignored){
+
+        }
+        return Result.success("success",name);
+    }
+
+    @GetMapping("/transaction")
+    public Result<String> transaction() {
+        transactionTemplate.execute(status->traceDemoService.updateFirst());
+        try {
+            transactionTemplate.execute(status -> traceDemoService.updateLast2());
+        }catch (Exception ignore){
+
+        }
+        return Result.success("success","");
     }
 
     @PostMapping("/request")
