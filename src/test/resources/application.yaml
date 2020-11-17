@@ -5,6 +5,12 @@ spring:
     password: bird123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    database: 12
+    host: 10.10.128.128
+    port: 6739
+    password: ctredis6739
+    timeout: 30000
 
 mybatis-plus:
   mapper-locations: classpath*:com/bird/samples/mapper/**/*.xml
