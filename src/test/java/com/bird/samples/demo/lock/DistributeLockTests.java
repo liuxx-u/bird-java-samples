@@ -1,6 +1,6 @@
 package com.bird.samples.demo.lock;
 
-import com.bird.core.exception.UserFriendlyException;
+import com.bird.lock.DistributedLockTemplate;
 import com.bird.lock.IDistributedLock;
 import com.bird.lock.reject.ExceptionRejectStrategy;
 import org.junit.Assert;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -23,7 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 class DistributeLockTests {
 
     @Autowired
-    private IDistributedLock distributedLock;
+    private DistributedLockTemplate distributedLock;
 
     @Test
     void asyncCount30Test() throws InterruptedException {
@@ -50,7 +49,7 @@ class DistributeLockTests {
                 counter.increase();
                 countDownLatch.countDown();
                 return true;
-            }, 30, 1000));
+            }));
             thread.start();
         }
         countDownLatch.await();
@@ -61,21 +60,23 @@ class DistributeLockTests {
     void asyncLockCount30ExceptionTest() throws InterruptedException {
         Counter counter = new Counter();
         Counter result = new Counter();
-        CountDownLatch countDownLatch = new CountDownLatch(30);
+        CountDownLatch countDownLatch = new CountDownLatch(20);
 
         for (int i = 0; i < 30; i++) {
             Thread thread = new Thread(() -> distributedLock.withLock("lockKey", () -> {
                 counter.increase();
-                countDownLatch.countDown();
                 if(counter.get() <= 10){
                     throw new RuntimeException("error");
                 }
                 result.increase();
+                countDownLatch.countDown();
+                System.out.println("thread :"+ Thread.currentThread().getName() + ":" +  result.get());
                 return true;
-            }, 30, 1000));
+            }));
             thread.start();
         }
         countDownLatch.await();
+        System.out.println("thread :"+ Thread.currentThread().getName() + ":" +  result.get());
         Assert.assertEquals(result.get(), 20);
     }
 
@@ -94,7 +95,7 @@ class DistributeLockTests {
                         return true;
                     });
                     return true;
-                }, 30, 1000);
+                });
                 countDownLatch.countDown();
             });
             thread.start();
@@ -113,14 +114,14 @@ class DistributeLockTests {
                 distributedLock.withLock("lockKey", () -> {
                     if (counter.get() == 0) {
                         System.out.println("sleep start");
-                        counter.increase(0);
+                        counter.increase(6000);
                         System.out.println("sleep end");
                     } else {
                         System.out.println("increase normal");
                         counter.increase();
                     }
                     return true;
-                }, 50, 1000, 5000, new ExceptionRejectStrategy<>());
+                }, 5000, 1000, 60000, new ExceptionRejectStrategy<>());
                 countDownLatch.countDown();
             });
             thread.start();
@@ -133,19 +134,17 @@ class DistributeLockTests {
     void asyncReentrantLockCount30ExceptionTest() throws InterruptedException {
         Counter counter = new Counter();
         Counter result = new Counter();
-        CountDownLatch countDownLatch = new CountDownLatch(59);
+        CountDownLatch countDownLatch = new CountDownLatch(28);
 
         for (int i = 0; i < 30; i++) {
             Thread thread = new Thread(() -> distributedLock.withLock("lockKey", () -> {
                 counter.increase();
-                countDownLatch.countDown();
                 if(counter.get() == 1){
                     throw new RuntimeException("error");
                 }
 
                 distributedLock.withLock("lockKey", () -> {
                     counter.increase();
-                    countDownLatch.countDown();
 
                     if(counter.get() == 3){
                         throw new RuntimeException("reentrant error");
@@ -153,8 +152,9 @@ class DistributeLockTests {
                     result.increase();
                     return true;
                 });
+                countDownLatch.countDown();
                 return true;
-            }, 30, 1000));
+            }));
             thread.start();
         }
         countDownLatch.await();
@@ -163,7 +163,7 @@ class DistributeLockTests {
 
     static class Counter {
 
-        private int count = 0;
+        private volatile int count = 0;
 
         int get() {
             return this.count;

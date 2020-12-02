@@ -1,7 +1,9 @@
 package com.bird.samples.service;
 
+import com.bird.eventbus.handler.EventHandler;
 import com.bird.samples.mapper.DemoMapper;
 import com.bird.samples.model.DemoDO;
+import com.bird.samples.pojo.TestArg;
 import com.bird.service.common.service.AbstractStringService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -35,5 +37,10 @@ public class DemoService extends AbstractStringService<DemoMapper, DemoDO> {
     @Scheduled(cron = "0/5 * * * * *")
     public void scheduleTest(){
         System.out.println(Thread.currentThread().getName());
+    }
+
+    @EventHandler
+    public void handleEvent(TestArg testArg){
+        System.out.println("service print : " + testArg.getName());
     }
 }

@@ -42,6 +42,21 @@
             <artifactId>bird-lock-redis</artifactId>
             <version>${bird.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.bird</groupId>-->
+            <!--<artifactId>bird-eventbus-kafka</artifactId>-->
+            <!--<version>${bird.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.bird</groupId>-->
+            <!--<artifactId>bird-eventbus-rocketmq</artifactId>-->
+            <!--<version>${bird.version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.bird</groupId>
+            <artifactId>bird-eventbus-rabbit</artifactId>
+            <version>${bird.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: bird-java-samples
   main:
     allow-bean-definition-overriding: true
   jackson:
@@ -32,6 +34,19 @@ spring:
       thread-name-prefix: bird-schedule-
       pool:
         size: 2
+  kafka:
+    producer:
+      clientId: ${spring.application.name}
+      bootstrap-servers: localhost:9092
+      value-serializer:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: ${spring.application.name}
+  rabbitmq:
+    host: 127.0.0.1 # RabbitMQ 服务的地址
+    port: 5672 # RabbitMQ 服务的端口
+    username: guest # RabbitMQ 服务的账号
+    password: guest # RabbitMQ 服务的密码
 
 mybatis-plus:
   mapper-locations: classpath*:com/bird/samples/mapper/**/*.xml
@@ -76,3 +91,27 @@ bird:
     disk:
       upload-dir: /mnt/upload/
       url-prefix: https://xxx.com
+  eventbus:
+    handler:
+      group: ${spring.application.name}
+      scan-packages: com.bird.samples
+      rocketmq:
+        name-server: http://10.10.128.158:9876
+        consume-thread-min: 20
+        consume-thread-max: 20
+        consume-timeout: 15
+        delay-level-when-next-consume: 0
+        message-model: clustering
+    log:
+      pool-size: 1
+      daemon: true
+      period: 20
+      threshold: 100
+      default-queue-size: 1024
+      thread-name-pattern: event-log-%d
+
+rocketmq:
+  name-server: http://10.10.128.158:9876
+  producer:
+    group: ${spring.application.name}
+
