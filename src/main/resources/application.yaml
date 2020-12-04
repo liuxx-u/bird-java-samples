@@ -109,6 +109,14 @@ bird:
       threshold: 100
       default-queue-size: 1024
       thread-name-pattern: event-log-%d
+  lock:
+    redis:
+      key-prefix: "bird:lock:"
+      key-expire: 60000
+      retry-interval: 1000
+      retry-expire: 60000
+
+
 
 rocketmq:
   name-server: http://10.10.128.158:9876

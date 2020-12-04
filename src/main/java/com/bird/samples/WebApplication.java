@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -33,7 +34,7 @@ public class WebApplication {
 //        evaluationContext.setVariable("demo",new TestArg("liuxx"));
         evaluationContext.setVariables(map);
 
-        String name = expressionParser.parseExpression("#demo.name").getValue(evaluationContext,String.class);
+        String name = expressionParser.parseExpression("Hello,#{#demo.name}",new TemplateParserContext()).getValue(evaluationContext,String.class);
         System.out.println(name);
     }
 
