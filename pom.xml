@@ -18,13 +18,18 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <bird.version>2.0.3-SNAPSHOT</bird.version>
+        <bird.version>2.0.4-SNAPSHOT</bird.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.bird</groupId>
             <artifactId>bird-web-support</artifactId>
+            <version>${bird.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bird</groupId>
+            <artifactId>bird-websocket-support</artifactId>
             <version>${bird.version}</version>
         </dependency>
         <dependency>
@@ -82,6 +87,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>

@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2020/10/9
  */
 @Slf4j
-@Component
+//@Component
 public class TestTraceLogStore implements ITraceLogStore {
     /**
      * 存储轨迹信息

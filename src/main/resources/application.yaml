@@ -76,8 +76,8 @@ bird:
   sso:
     client:
       cookie-name: Sso-Token
-      host: http://127.0.0.1:8080
-      server: http://127.0.0.1:8080
+      host: http:///10.10.200.236:8080
+      server: http://10.10.128.152:10000
   trace:
     dispatcher:
       period: 30
@@ -116,10 +116,11 @@ bird:
       retry-interval: 1000
       retry-expire: 60000
 
-
-
 rocketmq:
   name-server: http://10.10.128.158:9876
   producer:
     group: ${spring.application.name}
 
+logging:
+  level:
+    com.bird: trace

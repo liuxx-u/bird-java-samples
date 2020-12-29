@@ -43,7 +43,7 @@ public class LockController {
     }
 
     @GetMapping("/test")
-    @DistributedLock(key = "test:{#name}_{#remark}")
+    @DistributedLock(key = "test:{#name}_{#remark}_{#session.userId}")
     public Result<String> test(String name,String remark){
         return Result.success("success",name);
     }
