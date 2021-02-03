@@ -24,4 +24,9 @@ public class ConcurrentController {
         System.out.println(Thread.currentThread().getName());
         this.demoService.asyncTest();
     }
+
+    @GetMapping("/repeatRead")
+    public void repeatRead(){
+        this.demoService.repeatReadTest();
+    }
 }

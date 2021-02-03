@@ -1,6 +1,6 @@
 package com.bird.samples.controller;
 
-import com.bird.websocket.common.server.WebSocketServer;
+import com.bird.websocket.common.server.WebSocketPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class WebSocketController {
 
-    private final WebSocketServer webSocketServer;
+    private final WebSocketPublisher webSocketPublisher;
 
-    public WebSocketController(WebSocketServer webSocketServer) {
-        this.webSocketServer = webSocketServer;
+    public WebSocketController(WebSocketPublisher webSocketPublisher) {
+        this.webSocketPublisher = webSocketPublisher;
     }
 
     @GetMapping("/websocket")
@@ -26,6 +26,6 @@ public class WebSocketController {
     @ResponseBody
     @GetMapping("/websocket/send")
     public void send(String userId) {
-        webSocketServer.sendMessage("hello," + userId, userId);
+        webSocketPublisher.sendMessage("hello," + userId, userId);
     }
 }

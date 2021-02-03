@@ -2,6 +2,7 @@ package com.bird.samples.mapper;
 
 import com.bird.samples.model.DemoDO;
 import com.bird.service.common.mapper.AbstractMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,4 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface DemoMapper extends AbstractMapper<DemoDO> {
 
     void deleteAll();
+
+    void updateTest(@Param("id") String  id,@Param("name") String name);
 }

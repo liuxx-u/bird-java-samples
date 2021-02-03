@@ -9,6 +9,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 /**
  * @author liuxx
@@ -32,6 +35,22 @@ public class DemoService extends AbstractStringService<DemoMapper, DemoDO> {
         System.out.println(Thread.currentThread().getName());
 
         taskExecutor.submit(()-> System.out.println(Thread.currentThread().getName()));
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void repeatReadTest() {
+        String id = "0kfdaanom-2r3lei-n99pgt-000000";
+        DemoDO demo = super.getById(id);
+        System.out.println("oldName:" + demo.getName());
+
+        String newName = UUID.randomUUID().toString();
+
+        mapper.updateTest(id,newName);
+
+        System.out.println("newName:" + newName);
+
+        DemoDO demo2 = super.getById("0kfdaanom-2r3lei-n99pgt-000000");
+        System.out.println("repeatRead:" + demo2.getName());
     }
 
     @Scheduled(cron = "0/5 * * * * *")

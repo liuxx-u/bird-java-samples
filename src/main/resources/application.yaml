@@ -115,12 +115,15 @@ bird:
       key-expire: 60000
       retry-interval: 1000
       retry-expire: 60000
+  service:
+    grid:
+      base-packages: com.bird.samples
 
 rocketmq:
   name-server: http://10.10.128.158:9876
   producer:
     group: ${spring.application.name}
 
-logging:
-  level:
-    com.bird: trace
+#logging:
+#  level:
+#    com.bird: trace
