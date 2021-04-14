@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("full_demo")
+@TableName("demo2")
 public class FullDemoDO extends StringFullDO {
 
     private String name;

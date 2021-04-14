@@ -1,6 +1,7 @@
 package com.bird.samples.pojo;
 
 import com.bird.eventbus.arg.EventArg;
+import com.bird.eventbus.arg.LocalEventArg;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,7 +11,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class TestArg extends EventArg {
+public class TestArg extends LocalEventArg {
     private String name;
 
     public TestArg(){}

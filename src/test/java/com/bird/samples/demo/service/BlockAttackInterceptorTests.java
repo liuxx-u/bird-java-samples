@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.bird.samples.model.DemoDO;
 import com.bird.samples.service.DemoService;
-import com.bird.service.common.mapper.interceptor.OptimizeBlockAttackInnerInterceptor;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.MyBatisSystemException;
@@ -46,7 +45,7 @@ class BlockAttackInterceptorTests {
         assertThat(e).as(as).isInstanceOf(MyBatisSystemException.class);
     }
 
-    private final OptimizeBlockAttackInnerInterceptor interceptor = new OptimizeBlockAttackInnerInterceptor(null);
+    private final BlockAttackInnerInterceptor interceptor = new BlockAttackInnerInterceptor();
 
     @Test
     void update() {

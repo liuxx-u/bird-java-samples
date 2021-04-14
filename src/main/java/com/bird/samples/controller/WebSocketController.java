@@ -26,6 +26,6 @@ public class WebSocketController {
     @ResponseBody
     @GetMapping("/websocket/send")
     public void send(String userId) {
-        webSocketPublisher.sendMessage("hello," + userId, userId);
+//        webSocketPublisher.sendMessage("hello," + userId, userId);
     }
 }
