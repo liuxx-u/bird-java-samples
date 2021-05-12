@@ -1,6 +1,6 @@
-package com.bird.samples.controller;
+package com.bird.samples.web.support.controller;
 
-import com.bird.samples.pojo.DemoBO;
+import com.bird.samples.web.support.pojo.DemoBO;
 import com.bird.web.common.advice.JsonWrapperIgnore;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

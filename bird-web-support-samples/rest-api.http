@@ -1,0 +1,57 @@
+### /v1/api/json
+GET http://localhost:8080/v1/api/json
+Accept: application/json
+
+### /v2/api/json
+GET http://localhost:8080/v2/api/json
+Accept: application/json
+
+### /v1/api/read-json
+POST http://localhost:8080/v1/api/read-json
+Content-Type: application/json
+Accept: application/json
+
+{
+  "label": "liuxx",
+  "value": "1"
+}
+
+### /v1/api/read-url
+POST http://localhost:8080/v1/api/read-url?name=liuxx&value=1
+Accept: application/json
+
+### /exception/userFriendly
+GET http://localhost:8080/exception/userFriendly
+Accept: application/json
+
+### /exception/userFriendly
+GET http://localhost:8080/exception/userArgument
+Accept: application/json
+
+### /exception/illegalArgument
+GET http://localhost:8080/exception/illegalArgument
+Accept: application/json
+
+### /exception/runtime
+GET http://localhost:8080/exception/runtime
+Accept: application/json
+
+### /exception/other
+GET http://localhost:8080/exception/other
+Accept: application/json
+
+### /exception/valid
+GET http://localhost:8080/exception/valid
+Accept: application/json
+
+### /json/wrapper/auto
+GET http://localhost:8080/json/wrapper/auto
+Accept: application/json
+
+### /json/wrapper/ignore
+GET http://localhost:8080/json/wrapper/ignore
+Accept: application/json
+
+### /json/wrapper/auto/string
+GET http://localhost:8080/json/wrapper/auto/string
+Accept: application/json

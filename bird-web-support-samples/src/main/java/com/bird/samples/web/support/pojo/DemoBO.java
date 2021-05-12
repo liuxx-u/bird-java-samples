@@ -1,4 +1,4 @@
-package com.bird.samples.pojo;
+package com.bird.samples.web.support.pojo;
 
 import lombok.Data;
 

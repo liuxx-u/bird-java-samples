@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: bird-web-support-samples
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  redis:
+    database: 12
+    host: 10.10.128.128
+    port: 6739
+    password: ctredis6739
+    timeout: 30000
+
+bird:
+  web:
+    base-packages: com.bird.samples.web
+    ip-check:
+      enabled: true
+      ip-list:
+        - uri-pattern: /v1/*
+          ips: 0.0.0.0/0
+        - uri-pattern: /v2/*
+          ips: 0.0.0.0/0
+    body-read:
+      enabled: true
+  trace:
+    dispatcher:
+      period: 30
+    request:
+      trace-type: default
+      url-patterns: /**,/api
+      trace-headers: user-agent
+  file:
+    disk:
+      upload-dir: /mnt/upload/
+      url-prefix: https://xxx.com

@@ -1,4 +1,4 @@
-package com.bird.samples.controller;
+package com.bird.samples.web.support.controller;
 
 import com.bird.core.exception.UserArgumentException;
 import com.bird.core.exception.UserFriendlyException;
